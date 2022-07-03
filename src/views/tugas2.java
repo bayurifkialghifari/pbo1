@@ -29,6 +29,8 @@ public class tugas2 extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
 
+        setPreferredSize(new java.awt.Dimension(942, 374));
+
         jLabel1.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -38,14 +40,14 @@ public class tugas2 extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(160, 160, 160)
                 .addComponent(jLabel1)
-                .addContainerGap(193, Short.MAX_VALUE))
+                .addContainerGap(583, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(101, 101, 101)
                 .addComponent(jLabel1)
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap(240, Short.MAX_VALUE))
         );
 
         pack();

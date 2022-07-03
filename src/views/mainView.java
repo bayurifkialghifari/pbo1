@@ -28,22 +28,35 @@ public class mainView extends javax.swing.JFrame {
     public tugas1 tugas1 = new tugas1();
     public tugas2 tugas2 = new tugas2();
     public tugas3 tugas3 = new tugas3();
+    public boolean  isTugas1Exist = false, 
+                    isTugas2Exist = false, 
+                    isTugas3Exist = false;
         
+    // Show menu   
     public void show_menu(String menu)
     {
         hide_menu();
         
         switch(menu) {
             case "tugas1":
-                this.content.add(this.tugas1);
+                if(!this.isTugas1Exist) {
+                    this.isTugas1Exist = true;
+                    this.content.add(this.tugas1);
+                }
                 this.tugas1.setVisible(true);
                 break;
             case "tugas2":
-                this.content.add(this.tugas2);
+                if(!this.isTugas2Exist) {
+                    this.isTugas2Exist = true;
+                    this.content.add(this.tugas2);
+                }
                 this.tugas2.setVisible(true);
                 break;
             case "tugas3":
-                this.content.add(this.tugas3);
+                if(!this.isTugas3Exist) {
+                    this.isTugas3Exist = true;
+                    this.content.add(this.tugas3);
+                }
                 this.tugas3.setVisible(true);
                 break;
         }
@@ -101,9 +114,19 @@ public class mainView extends javax.swing.JFrame {
         jMenu2.add(menu_tugas1);
 
         menu_tugas2.setText("Tugas 2");
+        menu_tugas2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_tugas2ActionPerformed(evt);
+            }
+        });
         jMenu2.add(menu_tugas2);
 
         menu_tugas3.setText("Tugas 3");
+        menu_tugas3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_tugas3ActionPerformed(evt);
+            }
+        });
         jMenu2.add(menu_tugas3);
 
         menu.add(jMenu2);
@@ -127,6 +150,14 @@ public class mainView extends javax.swing.JFrame {
     private void menu_tugas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_tugas1ActionPerformed
         show_menu("tugas1");
     }//GEN-LAST:event_menu_tugas1ActionPerformed
+
+    private void menu_tugas2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_tugas2ActionPerformed
+        show_menu("tugas2");
+    }//GEN-LAST:event_menu_tugas2ActionPerformed
+
+    private void menu_tugas3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_tugas3ActionPerformed
+        show_menu("tugas3");
+    }//GEN-LAST:event_menu_tugas3ActionPerformed
 
     /**
      * @param args the command line arguments
