@@ -5,6 +5,13 @@
  */
 package views;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.Period;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTextField;
 
 /**
@@ -22,6 +29,21 @@ public class tugas2 extends javax.swing.JInternalFrame {
         initComponents();
         
         panel_hitung.setVisible(false);
+        age_text.setVisible(false);
+    }
+    
+    // Count age
+    private void count_age() {
+        String arr_date[] = this.tanggal_lahir.split("/");
+        
+        int day = Integer.parseInt(arr_date[0]);
+        int month = Integer.parseInt(arr_date[1]);
+        int year = Integer.parseInt(arr_date[2]);
+        
+        LocalDate startDate = LocalDate.of(year, month, day);
+        LocalDate currentDate = LocalDate.now();
+        
+        this.umur = Period.between(startDate, currentDate).getYears();
     }
     
 
@@ -43,7 +65,18 @@ public class tugas2 extends javax.swing.JInternalFrame {
         mhs_nim = new javax.swing.JTextField();
         mhs_nama = new javax.swing.JTextField();
         btn_count = new javax.swing.JButton();
+        age_text = new javax.swing.JLabel();
         panel_hitung = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        umur_nim = new javax.swing.JTextField();
+        umur_nama = new javax.swing.JTextField();
+        umur_tanggal_lahir = new com.toedter.calendar.JDateChooser();
+        age_field = new javax.swing.JTextField();
+        simpan_btn = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(942, 400));
 
@@ -66,6 +99,9 @@ public class tugas2 extends javax.swing.JInternalFrame {
             }
         });
 
+        age_text.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        age_text.setText("jLabel5");
+
         javax.swing.GroupLayout panel_mahasiswaLayout = new javax.swing.GroupLayout(panel_mahasiswa);
         panel_mahasiswa.setLayout(panel_mahasiswaLayout);
         panel_mahasiswaLayout.setHorizontalGroup(
@@ -82,25 +118,33 @@ public class tugas2 extends javax.swing.JInternalFrame {
                         .addGap(35, 35, 35)
                         .addGroup(panel_mahasiswaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btn_count)
-                            .addGroup(panel_mahasiswaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(mhs_tanggal_lahir, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                                .addComponent(mhs_nim)
-                                .addComponent(mhs_nama)))))
-                .addContainerGap(396, Short.MAX_VALUE))
+                            .addGroup(panel_mahasiswaLayout.createSequentialGroup()
+                                .addGroup(panel_mahasiswaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(mhs_tanggal_lahir, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                                    .addComponent(mhs_nim)
+                                    .addComponent(mhs_nama))
+                                .addGap(59, 59, 59)
+                                .addComponent(age_text)))))
+                .addContainerGap(292, Short.MAX_VALUE))
         );
         panel_mahasiswaLayout.setVerticalGroup(
             panel_mahasiswaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_mahasiswaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panel_mahasiswaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(mhs_nim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
-                .addGroup(panel_mahasiswaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(mhs_nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panel_mahasiswaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_mahasiswaLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panel_mahasiswaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(mhs_nim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
+                        .addGroup(panel_mahasiswaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(mhs_nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panel_mahasiswaLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(age_text)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel_mahasiswaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_mahasiswaLayout.createSequentialGroup()
@@ -112,15 +156,80 @@ public class tugas2 extends javax.swing.JInternalFrame {
                         .addComponent(btn_count))))
         );
 
+        jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel5.setText("FORM HITUNG UMUR");
+
+        jLabel6.setText("NIM");
+
+        jLabel7.setText("Nama");
+
+        jLabel8.setText("Tanggal Lahir");
+
+        jLabel9.setText("Umur");
+
+        umur_tanggal_lahir.setDateFormatString("d/M/y");
+        umur_tanggal_lahir.setMinSelectableDate(new java.util.Date(-62135791096000L));
+
+        simpan_btn.setText("Simpan");
+        simpan_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                simpan_btnMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel_hitungLayout = new javax.swing.GroupLayout(panel_hitung);
         panel_hitung.setLayout(panel_hitungLayout);
         panel_hitungLayout.setHorizontalGroup(
             panel_hitungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(panel_hitungLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panel_hitungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addGroup(panel_hitungLayout.createSequentialGroup()
+                        .addGroup(panel_hitungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panel_hitungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(simpan_btn)
+                            .addGroup(panel_hitungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(umur_tanggal_lahir, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                                .addComponent(umur_nim)
+                                .addComponent(umur_nama)
+                                .addComponent(age_field)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel_hitungLayout.setVerticalGroup(
             panel_hitungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 155, Short.MAX_VALUE)
+            .addGroup(panel_hitungLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panel_hitungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_hitungLayout.createSequentialGroup()
+                        .addComponent(umur_nim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(umur_nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel_hitungLayout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel7)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panel_hitungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(umur_tanggal_lahir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panel_hitungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_hitungLayout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panel_hitungLayout.createSequentialGroup()
+                        .addComponent(age_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(simpan_btn)
+                        .addGap(0, 16, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -129,17 +238,17 @@ public class tugas2 extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(panel_hitung, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panel_mahasiswa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(250, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panel_mahasiswa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panel_hitung, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panel_mahasiswa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panel_hitung, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -148,22 +257,57 @@ public class tugas2 extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_countMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_countMouseClicked
-        this.tanggal_lahir = ((JTextField)mhs_tanggal_lahir.getDateEditor().getUiComponent()).getText();
-        this.nim = mhs_nim.getText();
-        this.nama = mhs_nama.getText();
+        try {
+            this.tanggal_lahir = ((JTextField)mhs_tanggal_lahir.getDateEditor().getUiComponent()).getText();
+            this.nim = mhs_nim.getText();
+            this.nama = mhs_nama.getText();
+            
+            umur_nim.setText(this.nim);
+            umur_nama.setText(this.nama);
+            umur_tanggal_lahir.setDate(new SimpleDateFormat("dd/MM/yyyy").parse(tanggal_lahir));
+            
+            this.count_age();
+                    
+            age_field.setText(String.valueOf(this.umur));
+            
+            panel_mahasiswa.setVisible(false);
+            panel_hitung.setVisible(true);
+            age_text.setVisible(false);
+        } catch (ParseException ex) {
+            System.out.println("Error");
+        }
     }//GEN-LAST:event_btn_countMouseClicked
+
+    private void simpan_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_simpan_btnMouseClicked
+        panel_mahasiswa.setVisible(true);
+        panel_hitung.setVisible(false);
+        age_text.setVisible(true);
+        
+        age_text.setText(String.valueOf(this.umur) + " Tahun");
+    }//GEN-LAST:event_simpan_btnMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField age_field;
+    private javax.swing.JLabel age_text;
     private javax.swing.JButton btn_count;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField mhs_nama;
     private javax.swing.JTextField mhs_nim;
     private com.toedter.calendar.JDateChooser mhs_tanggal_lahir;
     private javax.swing.JPanel panel_hitung;
     private javax.swing.JPanel panel_mahasiswa;
+    private javax.swing.JButton simpan_btn;
+    private javax.swing.JTextField umur_nama;
+    private javax.swing.JTextField umur_nim;
+    private com.toedter.calendar.JDateChooser umur_tanggal_lahir;
     // End of variables declaration//GEN-END:variables
 }
