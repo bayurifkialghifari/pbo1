@@ -11,14 +11,14 @@ package config;
  */
 public class database {
     
-    private String host = "sql6.freemysqlhosting.net";
+    private String host = "bayurifki.my.id";
     private String port = "3306";
-    private String username = "sql6465737";
+    private String username = "bayurifk_pbo10-1";
     // Windows private String password = "";
     // Mac private String password = "12345678910";
     // Online private String password = "FeI6VrQl8q";
-    private String password = "FeI6VrQl8q";
-    private String database = "sql6465737";
+    private String password = "Cimahi123";
+    private String database = "bayurifk_pbo10-1";
     
     protected String get_host()
     {

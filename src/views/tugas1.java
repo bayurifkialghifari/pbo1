@@ -7,18 +7,23 @@ package views;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sql.rowset.CachedRowSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
+import model.mahasiswa;
 /**
  *
  * @author MAFUD SATRIO SETIONO
  */
 public class tugas1 extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form tugas1
-     */
+    public mahasiswa mhs = new mahasiswa();
+    public CachedRowSet crs;
+    public String nim, nama, nilais, index;
+    
     public tugas1() {
         initComponents();
         panelhitung.setVisible(false);
@@ -38,8 +43,32 @@ public class tugas1 extends javax.swing.JInternalFrame {
                 }
             }
         });
+        
+        // Show data from database        
+        try {
+            this.showData();
+        } catch (Exception ex) {
+            System.out.println("error");
+        }
     }
-
+    
+    public void showData() throws Exception {
+       this.crs = mhs.select_all("*");
+       // Create table instance
+       DefaultTableModel newtable = (DefaultTableModel) table_mahasiswa.getModel();
+       // Clear the table
+       newtable.setRowCount(0);
+       
+       // Print the data       
+       while(this.crs.next()) {
+           newtable.addRow(new Object[]{
+               this.crs.getString("nim"), 
+               this.crs.getString("nama"), 
+               this.crs.getString("nilai"), 
+               this.crs.getString("indeks")
+           });
+       }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -99,12 +128,6 @@ public class tugas1 extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Nama");
 
-        nim_tambahkan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nim_tambahkanActionPerformed(evt);
-            }
-        });
-
         btn_tambah_data.setText("Simpan");
         btn_tambah_data.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -124,11 +147,6 @@ public class tugas1 extends javax.swing.JInternalFrame {
         jLabel9.setText("Indeks");
 
         indeks.setEditable(false);
-        indeks.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                indeksActionPerformed(evt);
-            }
-        });
 
         hitung_btn.setText("Simpan");
         hitung_btn.addActionListener(new java.awt.event.ActionListener() {
@@ -256,13 +274,17 @@ public class tugas1 extends javax.swing.JInternalFrame {
         for (int i = 0; i < selectedRow.length; i++) {
             for (int j = 0; j < selectedColumns; j++) {
                 if(j == 0) {
-                    nim_nilai_tambah.setText((String) table_mahasiswa.getValueAt(selectedRow[i], j));
+                    this.nim = (String) table_mahasiswa.getValueAt(selectedRow[i], j);
+                    nim_nilai_tambah.setText(this.nim);
                 } else if (j == 1) {
-                    nama_nilai_tambah.setText((String) table_mahasiswa.getValueAt(selectedRow[i], j));
+                    this.nama = (String) table_mahasiswa.getValueAt(selectedRow[i], j);
+                    nama_nilai_tambah.setText(this.nama);
                 } else if (j == 2) {
-                    nilai.setText((String) table_mahasiswa.getValueAt(selectedRow[i], j));
+                    this.nilais = (String) table_mahasiswa.getValueAt(selectedRow[i], j);
+                    nilai.setText(this.nilais);
                 } else if (j == 3) {
-                    indeks.setText((String) table_mahasiswa.getValueAt(selectedRow[i], j));
+                    this.index = (String) table_mahasiswa.getValueAt(selectedRow[i], j);
+                    indeks.setText(this.index);
                 }
             }
         }
@@ -270,38 +292,67 @@ public class tugas1 extends javax.swing.JInternalFrame {
         panelhitung.setVisible(true);
     }//GEN-LAST:event_table_mahasiswaMouseClicked
 
-    private void nim_tambahkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nim_tambahkanActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nim_tambahkanActionPerformed
-
     private void btn_tambah_dataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_tambah_dataMouseClicked
-
-        if(nim_tambahkan.getText().equals("") || nama_tambahkan.getText().equals("")) {
+        this.nim = nim_tambahkan.getText();
+        this.nama = nama_tambahkan.getText();
+        int i = 0;
+        
+        if(this.nim.equals("") || this.nama.equals("")) {
             JOptionPane.showMessageDialog(this, "Masukkan Data Yang Kosong Terlebih Dahulu!!");
         } else {
-            // Create table instance
-            DefaultTableModel newtable = (DefaultTableModel) table_mahasiswa.getModel();
-
-            newtable.addRow(new Object[]{nim_tambahkan.getText(), nama_tambahkan.getText(), "", ""});
+            try {
+                // Check nim is exist or not
+                this.crs = mhs.select_where("*", "nim", nim, "");
+                
+                while(this.crs.next()) {
+                   i++; 
+                }
+                
+                // If exist
+                if(i > 0) {
+                   JOptionPane.showMessageDialog(this, "NIM sudah ada!!"); 
+                } else {
+                    // Insert data to database
+                    String [] field = {"nim", "nama", "nilai", "indeks"};
+                    String [] data = {this.nim, this.nama, "0", ""};
+            
+                    mhs.insert(field, data);
+            
+                    // Show data from database 
+                    this.showData();
+                }
+            } catch (Exception ex) {
+                System.out.println("error");
+            }
         }
+        
+        nim_tambahkan.setText("");
+        nama_tambahkan.setText("");
     }//GEN-LAST:event_btn_tambah_dataMouseClicked
-
-    private void indeksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indeksActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_indeksActionPerformed
 
     private void hitung_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hitung_btnActionPerformed
         if(nilai.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Masukkan Data Yang Kosong Terlebih Dahulu!!");
         } else {
-
-            String data[] = {nim_nilai_tambah.getText(), nama_nilai_tambah.getText(), nilai.getText(), indeks.getText()};
-
-            DefaultTableModel newtable = (DefaultTableModel) table_mahasiswa.getModel();
-            newtable.setValueAt(nim_nilai_tambah.getText(), table_mahasiswa.getSelectedRow(), 0);
-            newtable.setValueAt(nama_nilai_tambah.getText(), table_mahasiswa.getSelectedRow(), 1);
-            newtable.setValueAt(nilai.getText(), table_mahasiswa.getSelectedRow(), 2);
-            newtable.setValueAt(indeks.getText(), table_mahasiswa.getSelectedRow(), 3);
+            // Show data from database        
+            try {
+                // Insert data to database
+                String [] field = {"nim", "nama", "nilai", "indeks"};
+                String [] data = {
+                    nim_nilai_tambah.getText(), 
+                    nama_nilai_tambah.getText(), 
+                    nilai.getText(), 
+                    indeks.getText(),
+                };
+            
+                mhs.update(field, data, "nim", this.nim);
+            
+                // Show data from database 
+                this.showData();
+            } catch (Exception ex) {
+                System.out.println("error");
+            }
+            
             nim_nilai_tambah.setText("");
             nama_nilai_tambah.setText("");
             nilai.setText("");
