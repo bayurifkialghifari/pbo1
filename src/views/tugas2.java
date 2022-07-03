@@ -5,18 +5,25 @@
  */
 package views;
 
+import javax.swing.JTextField;
+
 /**
  *
  * @author MAFUD SATRIO SETIONO
  */
 public class tugas2 extends javax.swing.JInternalFrame {
 
+    private String tanggal_lahir, nim, nama;
+    private int umur;
     /**
      * Creates new form tugas2
      */
     public tugas2() {
         initComponents();
+        
+        panel_hitung.setVisible(false);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,34 +34,136 @@ public class tugas2 extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panel_mahasiswa = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        mhs_tanggal_lahir = new com.toedter.calendar.JDateChooser();
+        mhs_nim = new javax.swing.JTextField();
+        mhs_nama = new javax.swing.JTextField();
+        btn_count = new javax.swing.JButton();
+        panel_hitung = new javax.swing.JPanel();
 
-        setPreferredSize(new java.awt.Dimension(942, 374));
+        setPreferredSize(new java.awt.Dimension(942, 400));
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel1.setText("FORM MAHASISWA");
+
+        jLabel2.setText("NIM");
+
+        jLabel3.setText("Nama");
+
+        jLabel4.setText("Tanggal Lahir");
+
+        mhs_tanggal_lahir.setDateFormatString("d/M/y");
+        mhs_tanggal_lahir.setMinSelectableDate(new java.util.Date(-62135791096000L));
+
+        btn_count.setText("Hitung");
+        btn_count.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_countMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panel_mahasiswaLayout = new javax.swing.GroupLayout(panel_mahasiswa);
+        panel_mahasiswa.setLayout(panel_mahasiswaLayout);
+        panel_mahasiswaLayout.setHorizontalGroup(
+            panel_mahasiswaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_mahasiswaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panel_mahasiswaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(panel_mahasiswaLayout.createSequentialGroup()
+                        .addGroup(panel_mahasiswaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(35, 35, 35)
+                        .addGroup(panel_mahasiswaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btn_count)
+                            .addGroup(panel_mahasiswaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(mhs_tanggal_lahir, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                                .addComponent(mhs_nim)
+                                .addComponent(mhs_nama)))))
+                .addContainerGap(396, Short.MAX_VALUE))
+        );
+        panel_mahasiswaLayout.setVerticalGroup(
+            panel_mahasiswaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_mahasiswaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panel_mahasiswaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(mhs_nim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(panel_mahasiswaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(mhs_nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panel_mahasiswaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_mahasiswaLayout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addContainerGap())
+                    .addGroup(panel_mahasiswaLayout.createSequentialGroup()
+                        .addComponent(mhs_tanggal_lahir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                        .addComponent(btn_count))))
+        );
+
+        javax.swing.GroupLayout panel_hitungLayout = new javax.swing.GroupLayout(panel_hitung);
+        panel_hitung.setLayout(panel_hitungLayout);
+        panel_hitungLayout.setHorizontalGroup(
+            panel_hitungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panel_hitungLayout.setVerticalGroup(
+            panel_hitungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 155, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(160, 160, 160)
-                .addComponent(jLabel1)
-                .addContainerGap(583, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(panel_hitung, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panel_mahasiswa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(250, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(101, 101, 101)
-                .addComponent(jLabel1)
-                .addContainerGap(240, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(panel_mahasiswa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(panel_hitung, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_countMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_countMouseClicked
+        this.tanggal_lahir = ((JTextField)mhs_tanggal_lahir.getDateEditor().getUiComponent()).getText();
+        this.nim = mhs_nim.getText();
+        this.nama = mhs_nama.getText();
+    }//GEN-LAST:event_btn_countMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_count;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField mhs_nama;
+    private javax.swing.JTextField mhs_nim;
+    private com.toedter.calendar.JDateChooser mhs_tanggal_lahir;
+    private javax.swing.JPanel panel_hitung;
+    private javax.swing.JPanel panel_mahasiswa;
     // End of variables declaration//GEN-END:variables
 }
