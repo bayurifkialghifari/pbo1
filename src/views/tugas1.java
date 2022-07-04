@@ -109,7 +109,15 @@ public class tugas1 extends javax.swing.JInternalFrame {
             new String [] {
                 "NIM", "Nama", "Nilai", "Indeks"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         table_mahasiswa.setVerifyInputWhenFocusTarget(false);
         table_mahasiswa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

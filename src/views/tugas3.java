@@ -14,8 +14,12 @@ public class tugas3 extends javax.swing.JInternalFrame {
     /**
      * Creates new form tugas3
      */
+    public String nim, nama, nilai, indeks;
     public tugas3() {
         initComponents();
+        
+        form_mahasiswa.setVisible(false);
+        table_mahasiswa.setVisible(false);
     }
 
     /**
@@ -27,23 +31,210 @@ public class tugas3 extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        form_mahasiswa = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        fnim = new javax.swing.JTextField();
+        fnama = new javax.swing.JTextField();
+        fnilai = new javax.swing.JTextField();
+        findeks = new javax.swing.JTextField();
+        btn_show_mahasiswa = new javax.swing.JButton();
+        table_mahasiswa = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        table = new javax.swing.JTable();
+        btn_kirim = new javax.swing.JButton();
+
         setPreferredSize(new java.awt.Dimension(942, 374));
+
+        jLabel1.setText("Nim");
+
+        jLabel2.setText("Nama");
+
+        jLabel3.setText("Nilai");
+
+        jLabel4.setText("Indeks");
+
+        javax.swing.GroupLayout form_mahasiswaLayout = new javax.swing.GroupLayout(form_mahasiswa);
+        form_mahasiswa.setLayout(form_mahasiswaLayout);
+        form_mahasiswaLayout.setHorizontalGroup(
+            form_mahasiswaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(form_mahasiswaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(form_mahasiswaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(form_mahasiswaLayout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(findeks, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(form_mahasiswaLayout.createSequentialGroup()
+                        .addGroup(form_mahasiswaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(24, 24, 24)
+                        .addGroup(form_mahasiswaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fnilai, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fnama, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fnim, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        form_mahasiswaLayout.setVerticalGroup(
+            form_mahasiswaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(form_mahasiswaLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(form_mahasiswaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(fnim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(form_mahasiswaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(fnama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(form_mahasiswaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(fnilai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(form_mahasiswaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(findeks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(258, Short.MAX_VALUE))
+        );
+
+        btn_show_mahasiswa.setText("Tampilkan Form Mahasiswa");
+        btn_show_mahasiswa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_show_mahasiswaMouseClicked(evt);
+            }
+        });
+
+        table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"10102102", "Ujang Komarudin", "80", "A"},
+                {"10102103", "HENDRA DEDI SUPRIADI", "51", "C"},
+                {"10102104", "Willy Samuel", "87", "A"}
+            },
+            new String [] {
+                "NIM", "Nama", "Nilai", "Indeks"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(table);
+
+        btn_kirim.setText("Kirim Data");
+        btn_kirim.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_kirimMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout table_mahasiswaLayout = new javax.swing.GroupLayout(table_mahasiswa);
+        table_mahasiswa.setLayout(table_mahasiswaLayout);
+        table_mahasiswaLayout.setHorizontalGroup(
+            table_mahasiswaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(table_mahasiswaLayout.createSequentialGroup()
+                .addGroup(table_mahasiswaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(table_mahasiswaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(table_mahasiswaLayout.createSequentialGroup()
+                        .addGap(139, 139, 139)
+                        .addComponent(btn_kirim)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        table_mahasiswaLayout.setVerticalGroup(
+            table_mahasiswaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(table_mahasiswaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_kirim)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(form_mahasiswa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(table_mahasiswa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_show_mahasiswa))
+                .addContainerGap(307, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_show_mahasiswa)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(table_mahasiswa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(form_mahasiswa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(39, 39, 39))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_show_mahasiswaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_show_mahasiswaMouseClicked
+        form_mahasiswa.setVisible(false);
+        table_mahasiswa.setVisible(true);
+    }//GEN-LAST:event_btn_show_mahasiswaMouseClicked
+
+    private void btn_kirimMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_kirimMouseClicked
+        form_mahasiswa.setVisible(true);
+        table_mahasiswa.setVisible(false);
+        
+        // Get data form table
+        int[] selectedRow = table.getSelectedRows();
+        int selectedColumns = 4;
+
+        for (int i = 0; i < selectedRow.length; i++) {
+            for (int j = 0; j < selectedColumns; j++) {
+                if(j == 0) {
+                    this.nim = (String) table.getValueAt(selectedRow[i], j);
+                    fnim.setText(this.nim);
+                } else if (j == 1) {
+                    this.nama = (String) table.getValueAt(selectedRow[i], j);
+                    fnama.setText(this.nama);
+                } else if (j == 2) {
+                    this.nilai = (String) table.getValueAt(selectedRow[i], j);
+                    fnilai.setText(this.nilai);
+                } else if (j == 3) {
+                    this.indeks = (String) table.getValueAt(selectedRow[i], j);
+                    findeks.setText(this.indeks);
+                }
+            }
+        }        
+    }//GEN-LAST:event_btn_kirimMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_kirim;
+    private javax.swing.JButton btn_show_mahasiswa;
+    private javax.swing.JTextField findeks;
+    private javax.swing.JTextField fnama;
+    private javax.swing.JTextField fnilai;
+    private javax.swing.JTextField fnim;
+    private javax.swing.JPanel form_mahasiswa;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable table;
+    private javax.swing.JPanel table_mahasiswa;
     // End of variables declaration//GEN-END:variables
 }
